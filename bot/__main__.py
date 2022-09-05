@@ -26,7 +26,8 @@ def stats(update, context):
     total, used, free, disk = disk_usage('/')
     swap = swap_memory()
     memory = virtual_memory()
-    stats = f'<b>Last Update:</b> {last_commit}\n\n'\
+    stats = f'<b>X-Cloud</b>\n\n'\
+            f'<b>Last Update:</b> {last_commit}\n\n'\
             f'<b>Working for:</b> {get_readable_time(time() - botStartTime)}\n'\
             f'<b>Total SSD Space:</b> {get_readable_file_size(total)}\n'\
             f'<b>Used:</b> {get_readable_file_size(used)} | <b>Free:</b> {get_readable_file_size(free)}\n\n'\
@@ -39,7 +40,8 @@ def stats(update, context):
             f'<b>SWAP:</b> {get_readable_file_size(swap.total)} | <b>Used:</b> {swap.percent}%\n'\
             f'<b>Memory Total:</b> {get_readable_file_size(memory.total)}\n'\
             f'<b>Memory Free:</b> {get_readable_file_size(memory.available)}\n'\
-            f'<b>Memory Used:</b> {get_readable_file_size(memory.used)}\n'
+            f'<b>Memory Used:</b> {get_readable_file_size(memory.used)}\n\n'\
+            f'<b>@bishalqx980</b>\n'
     sendMessage(stats, context.bot, update.message)
 
 
