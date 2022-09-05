@@ -26,16 +26,14 @@ def stats(update, context):
     total, used, free, disk = disk_usage('/')
     swap = swap_memory()
     memory = virtual_memory()
-    stats = f'<b>Commit Date:</b> {last_commit}\n\n'\
-            f'<b>Bot Uptime:</b> {get_readable_time(time() - botStartTime)}\n'\
-            f'<b>OS Uptime:</b> {get_readable_time(time() - boot_time())}\n\n'\
-            f'<b>Total Disk Space:</b> {get_readable_file_size(total)}\n'\
+    stats = f'<b>Last Update:</b> {last_commit}\n\n'\
+            f'<b>Working for:</b> {get_readable_time(time() - botStartTime)}\n'\
+            f'<b>Total SSD Space:</b> {get_readable_file_size(total)}\n'\
             f'<b>Used:</b> {get_readable_file_size(used)} | <b>Free:</b> {get_readable_file_size(free)}\n\n'\
             f'<b>Upload:</b> {get_readable_file_size(net_io_counters().bytes_sent)}\n'\
             f'<b>Download:</b> {get_readable_file_size(net_io_counters().bytes_recv)}\n\n'\
-            f'<b>CPU:</b> {cpu_percent(interval=0.5)}%\n'\
-            f'<b>RAM:</b> {memory.percent}%\n'\
-            f'<b>DISK:</b> {disk}%\n\n'\
+            f'<b>CPU:</b> {cpu_percent(interval=0.5)}% | <b>RAM:</b> {memory.percent}%\n'\
+            f'<b>SSD:</b> {disk}%\n\n'\
             f'<b>Physical Cores:</b> {cpu_count(logical=False)}\n'\
             f'<b>Total Cores:</b> {cpu_count(logical=True)}\n\n'\
             f'<b>SWAP:</b> {get_readable_file_size(swap.total)} | <b>Used:</b> {swap.percent}%\n'\
@@ -47,17 +45,17 @@ def stats(update, context):
 
 def start(update, context):
     buttons = ButtonMaker()
-    buttons.buildbutton("Repo", "https://www.github.com/anasty17/mirror-leech-telegram-bot")
-    buttons.buildbutton("Owner", "https://www.github.com/anasty17")
+    buttons.buildbutton("Owner", "https://t.me/bishalqx980")
+    buttons.buildbutton("Group", "https://t.me/XcloudMirror")
     reply_markup = buttons.build_menu(2)
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
-This bot can mirror all your links to Google Drive or to telegram!
+not for personal use, join group!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
         sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
-        sendMarkup('Not an Authorized user, deploy your own mirror-leech bot', context.bot, update.message, reply_markup)
+        sendMarkup('Not for personal use, Join Group!', context.bot, update.message, reply_markup)
 
 def restart(update, context):
     restart_message = sendMessage("Restarting...", context.bot, update.message)
@@ -180,7 +178,7 @@ def main():
     elif not notifier_dict and AUTHORIZED_CHATS:
         for id_ in AUTHORIZED_CHATS:
             try:
-                bot.sendMessage(id_, "Bot Restarted!", 'HTML')
+                bot.sendMessage(id_, "<i>I'm Alive</i>", 'HTML')
             except Exception as e:
                 LOGGER.error(e)
 
